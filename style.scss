@@ -1,121 +1,103 @@
-/**************/
-/* GENEL AYARLAR */
-/**************/
+/***************************/
+/* ADAPTE EDİLMİŞ HEADER  */
+/***************************/
 
-body {
-  background-color: #0f172a !important; /* Koyu lacivert/siyah arka plan */
-  color: #f1f5f9 !important;
-  font-family: 'Inter', -apple-system, sans-serif;
-  line-height: 1.6;
-}
-
-/* Sayfa İçeriğini Barındıran Ana Konteynır (About sayfası dahil) */
-#main {
+.wrapper-masthead {
+  margin-top: 75vh; /* Terminalin altında başlasın */
   position: relative;
-  z-index: 5;
-  background: rgba(114, 32, 110, 0.15); /* Post kartlarındaki o morumsu doku */
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(250, 210, 239, 0.15);
-  border-radius: 20px;
-  padding: 40px;
-  margin-top: 30px;
-  margin-bottom: 50px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  z-index: 20;
+  /* Senin post kartlarındaki morumsu dokuyla uyumlu hale getirildi */
+  background: rgba(15, 23, 42, 0.9) !important; 
+  backdrop-filter: blur(15px);
+  border-top: 1px solid rgba(253, 125, 193, 0.3);
+  border-bottom: 1px solid rgba(253, 125, 193, 0.1);
+  padding: 15px 0;
 }
 
-/* Başlıklar (Hakkımda başlığı vb.) */
-h1, h2, h3 {
-  color: #fd7dc1 !important; /* Neon Pembe */
-  text-shadow: 0 0 10px rgba(253, 125, 193, 0.3);
-  font-weight: 700;
+.masthead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Sol ve Sağ grubu ayırır */
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 40px;
 }
 
-h1 { font-size: 2.2rem; margin-bottom: 20px; }
-
-/* Linkler */
-a {
-  color: #fd7dc1;
-  transition: all 0.3s ease;
-  text-decoration: none;
+/* SOL: Avatar ve Yazı Grubu */
+.site-header-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
-a:hover {
-  color: #fff;
-  text-shadow: 0 0 8px #fd7dc1;
-}
-
-/*********************/
-/* POST VE SAYFA İÇİ */
-/*********************/
-
-/* Eğer About sayfasında da kart görünümü istersen bu sınıfı kullanabilirsin */
-.post, .page-content {
-  padding: 25px;
-  background: rgba(114, 32, 110, 0.3); /* Biraz daha belirgin mor */
-  border: 1px solid rgba(250, 210, 239, 0.2);
-  border-radius: 12px;
-  margin-bottom: 20px;
+.site-avatar img {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  border: 2px solid #fd7dc1;
+  box-shadow: 0 0 15px rgba(253, 125, 193, 0.3);
   transition: transform 0.3s ease;
 }
 
-/* Liste elemanları ve yazılar */
-p, li {
-  color: #d9e2ec;
-  font-size: 18px;
+.site-avatar img:hover {
+  transform: scale(1.05);
 }
 
-strong {
-  color: #fff;
-  text-shadow: 0 0 5px rgba(253, 125, 193, 0.5);
+.site-info {
+  display: flex;
+  flex-direction: column;
 }
 
-/*********************/
-/* FOOTER DÜZENLEME  */
-/*********************/
-
-.wrapper-footer {
-  margin-top: 50px;
-  border-top: 1px solid rgba(253, 125, 193, 0.2);
-  background-color: rgba(15, 23, 42, 0.9);
-  padding: 30px 0;
+.site-name {
+  margin: 0 !important;
+  font-size: 1.6rem !important;
+  font-weight: 800;
 }
 
-footer p {
-  color: #94a3b8;
+.site-description {
+  margin: 2px 0 0 0 !important;
+  color: #d9e2ec !important; /* CSS'indeki genel yazı rengi */
+  font-size: 0.85rem !important;
+  opacity: 0.8;
+  letter-spacing: 0.5px;
 }
 
-/* Kod Blokları (Eğer About sayfasında kod varsa) */
-code, pre {
-  background: #000 !important;
-  border: 1px solid #fd7dc1;
-  color: #f8a5e3 !important;
-  border-radius: 8px;
-}
-/**************************/
-/* İÇERİK OKUNABİLİRLİĞİ  */
-/**************************/
-
-/* Jekyll temalarından gelen sınıfları garantiye alalım */
-.post .entry p, 
-.post .entry li, 
-article p, 
-article li,
-.entry-content {
-  color: #d9e2ec !important; /* Tanımladığın o açık gri/mavi tonu */
-  font-size: 18px !important;
-  line-height: 1.8 !important; /* Okunabilirlik için satır aralığını biraz açtık */
+/* SAĞ: Menü */
+nav {
+  display: flex;
+  gap: 25px;
 }
 
-/* Post içindeki vurgulu alanlar */
-.post em, .post i {
-  color: #f8a5e3; /* İtalik yazılar için hafif pembe dokunuş */
+nav a {
+  color: #f1f5f9 !important; /* Genel yazı renginle uyumlu */
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-/* Post içindeki blok alıntılar (Blockquotes) */
-blockquote {
-  border-left: 4px solid #fd7dc1;
-  padding-left: 20px;
-  font-style: italic;
-  background: rgba(253, 125, 193, 0.05);
-  margin: 20px 0;
+nav a:hover {
+  color: #fd7dc1 !important; /* Hover'da senin neon pemben */
+}
+
+/* MOBİL UYUMLULUK */
+@media screen and (max-width: 768px) {
+  .masthead {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+  .site-header-left {
+    flex-direction: column;
+    gap: 10px;
+  }
+  nav {
+    width: 100%;
+    justify-content: center;
+    border-top: 1px solid rgba(253, 125, 193, 0.1);
+    padding-top: 15px;
+  }
+  .wrapper-masthead {
+    margin-top: 55vh;
+  }
 }
