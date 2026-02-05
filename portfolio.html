@@ -1,0 +1,257 @@
+---
+layout: default
+title: Portfolio
+---
+
+<div id="game-viewport">
+    <div id="game-hint">İlerlemek için Ok Tuşlarını veya Butonları Kullan!</div>
+    <div id="game-player"></div>
+    <div id="mobile-controls">
+    <button id="btn-left">◀</button>
+    <button id="btn-right">▶</button>
+</div>
+    
+    <div id="game-timeline">
+        <div class="cv-node">
+            <div class="node-year">2022</div>
+            <div class="node-content">
+                <h3>Maceranın Başlangıcı</h3>
+                <p>İlk satır kodlar, heyecan ve merak...</p>
+            </div>
+        </div>
+        
+        <div class="cv-node">
+            <div class="node-year">2023</div>
+            <div class="node-content">
+                <h3>Level Up: Game Dev</h3>
+                <p>C# ve Unity dünyasına giriş yapıldı.</p>
+            </div>
+        </div>
+
+        <div class="cv-node">
+            <div class="node-year">2024</div>
+            <div class="node-content">
+                <h3>Final Boss: FullStack</h3>
+                <p>Komple projeler ve canlıya alınan işler.</p>
+            </div>
+        </div>
+    </div>
+    <div id="game-floor"></div>
+</div>
+
+<style>
+    #game-hint {
+    position: absolute;
+    top: 90px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fd7dc1;
+    font-family: monospace;
+    text-shadow: 0 0 5px #fd7dc1;
+    animation: blink 0.5s infinite;
+    z-index: 150;
+    font-size: xx-large;
+}
+
+@keyframes blink {
+    25% { opacity: 10; }
+}
+    #mobile-controls {
+    position: absolute;
+    bottom: 60px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    z-index: 200;
+}
+
+#mobile-controls button {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: rgba(253, 125, 193, 0.2);
+    border: 2px solid #fd7dc1;
+    color: white;
+    font-size: 24px;
+    touch-action: manipulation; /* Zoom yapmasını engeller */
+}
+
+/* Masaüstünde gizle */
+@media (min-width: 768px) {
+    #mobile-controls { display: none; }
+}
+/* Senin neon temana uygun oyun alanı */
+#game-viewport {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    /* ARKA PLAN RESMİ BURAYA */
+    background-image: url('/images/bg.png');
+    background-size: cover;
+    background-position: 0px center; /* JS ile bu değeri değiştireceğiz */
+    border: 2px solid #fd7dc1;
+    overflow: hidden;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+
+#game-floor {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 47px;
+    
+    /* TEKRAR EDEN ZEMİN DOKUSU */
+    /* İstersen kendi metal/pixel art zemin PNG'ni buraya koyabilirsin */
+    background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre.png'), 
+                      linear-gradient(to bottom, #fd7dc1 0%, #111 20%);
+    background-repeat: repeat-x;
+    background-size: 50px 40px; /* Dokunun büyüklüğü */
+    
+    
+    box-shadow: 0 -10px 20px rgba(253, 125, 193, 0.3); /* Zemine hafif bir neon parlaması */
+    z-index: 60;
+}
+#game-player {
+    position: absolute;
+    bottom: 40px;
+    left: 80px;
+    width: 80px;
+    height: 80px;
+    
+    /* Arka planı tamamen temizleyelim */
+   
+    background-color: transparent !important; 
+    background-image: url('/images/player.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    
+    /* Kenarlık varsa kaldıralım */
+    border: none !important; 
+    
+    z-index: 100;
+    
+    /* Neon Efekti: Sadece karakterin dolu kısımlarına ışık verir (transparan kısımları parlatmaz) */
+    
+    
+   --direction: 1; /* Varsayılan yön değişkeni */
+    transform: scaleX(var(--direction)); 
+    transition: transform 0.2s ease;/* Dönüşe hafif bir akıcılık katar */
+}
+
+.player-walking {
+    animation: walkAnim 0.3s infinite alternate ease-in-out;
+}
+
+@keyframes walkAnim {
+    from { transform: scaleX(var(--direction)) translateY(0); }
+    to { transform: scaleX(var(--direction)) translateY(-2px); }
+}
+#game-timeline {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: flex-end;
+    padding-left: 400px;
+    height: 100%;
+    transition: transform 0.1s linear;
+}
+
+.cv-node {
+    min-width: 280px;
+    margin-right: 400px;
+    background: rgba(255, 20, 147, 0.1);
+    border: 1px solid #fd7dc1;
+    padding: 15px;
+    margin-bottom: 120px;
+    position: relative;
+    color: #fff;
+    backdrop-filter: blur(5px);
+}
+
+.cv-node::after {
+    content: '';
+    position: absolute;
+    bottom: -80px;
+    left: 50%;
+    width: 2px;
+    height: 80px;
+    background: #fd7dc1;
+}
+
+.node-year {
+    background: #fd7dc1;
+    color: #000;
+    display: inline-block;
+    padding: 2px 8px;
+    font-weight: bold;
+    font-family: monospace;
+}
+</style>
+
+<script>
+    const p = document.getElementById('game-player');
+    const t = document.getElementById('game-timeline');
+    const hint = document.getElementById('game-hint');
+    const btnLeft = document.getElementById('btn-left');
+    const btnRight = document.getElementById('btn-right');
+
+    let pos = 0;
+    const s = 15;
+    let k = {};
+
+    // Hareketi Başlatma Fonksiyonu
+    function startMoving(code) {
+        k[code] = true;
+        hint.style.opacity = '0'; // İpucunu yumuşakça gizle
+        p.classList.add('player-walking');
+        
+        if(code === 'ArrowRight') {
+            p.style.setProperty('--direction', '-1');
+        } else if(code === 'ArrowLeft') {
+            p.style.setProperty('--direction', '1');
+        }
+    }
+
+    // Hareketi Durdurma Fonksiyonu
+    function stopMoving(code) {
+        k[code] = false;
+        if(!k['ArrowRight'] && !k['ArrowLeft']) {
+            p.classList.remove('player-walking');
+        }
+    }
+
+    // Klavye Olayları
+    window.addEventListener('keydown', (e) => startMoving(e.code));
+    window.addEventListener('keyup', (e) => stopMoving(e.code));
+
+    // MOBİL VE FARE OLAYLARI (Hem dokunmatik hem tıklama için)
+    // Sol Buton
+    btnLeft.addEventListener('mousedown', () => startMoving('ArrowLeft'));
+    btnLeft.addEventListener('mouseup', () => stopMoving('ArrowLeft'));
+    btnLeft.addEventListener('touchstart', (e) => { e.preventDefault(); startMoving('ArrowLeft'); });
+    btnLeft.addEventListener('touchend', (e) => { e.preventDefault(); stopMoving('ArrowLeft'); });
+
+    // Sağ Buton
+    btnRight.addEventListener('mousedown', () => startMoving('ArrowRight'));
+    btnRight.addEventListener('mouseup', () => stopMoving('ArrowRight'));
+    btnRight.addEventListener('touchstart', (e) => { e.preventDefault(); startMoving('ArrowRight'); });
+    btnRight.addEventListener('touchend', (e) => { e.preventDefault(); stopMoving('ArrowRight'); });
+
+    function loop() {
+        if(k['ArrowRight']) {
+            pos -= s;
+        }
+        if(k['ArrowLeft'] && pos < 0) {
+            pos += s;
+        }
+        
+        t.style.transform = `translateX(${pos}px)`;
+        requestAnimationFrame(loop);
+    }
+
+    loop();
+</script>

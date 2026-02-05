@@ -1,0 +1,30 @@
+
+//
+// VARIABLES
+//
+$background-color: #0f172a; // Çok koyu lacivert (Uzay mavisi)
+$card-bg: #1e293b;         // Kartlar için bir ton açık lacivert
+$text-color: #f1f5f9;      // Neredeyse beyaz (Okunurluk için)
+$accent-color: #38bdf8;    // Parlak teknoloji mavisi (Linkler ve ikonlar için)
+// Colors
+$blue: #4183C4;
+
+// Grays
+$black: #000;
+$darkerGray: #222;
+$darkGray: #333;
+$gray: #666;
+$lightGray: #eee;
+$white: #fff;
+
+// Font stacks
+$helvetica: Helvetica, Arial, sans-serif;
+$helveticaNeue: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$georgia: Georgia, serif;
+
+// Mobile breakpoints
+@mixin mobile {
+  @media screen and (max-width: 640px) {
+    @content;
+  }
+}

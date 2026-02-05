@@ -1,0 +1,91 @@
+---
+layout: default
+---
+
+<style>
+  /* Sayfa Genel Ayarları */
+  body {
+    background-color: #0f172a !important;
+    color: #f1f5f9 !important;
+    font-family: 'Inter', -apple-system, sans-serif;
+  }
+
+  /* Kart (Post) Görünümü */
+  .post {
+    padding: 25px;
+    margin-bottom: 30px;
+    background: #72206e9a;
+    border: 1px solid rgba(250, 210, 239, 0.19);
+    border-radius: 12px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+
+  .post:hover {
+    transform: translateY(-8px);
+    border-color: #f56ee9;
+  }
+
+  /* Başlıklar ve Linkler */
+  .post h1 a {
+    color: pink !important;
+    text-decoration: none;
+    font-size: 1.5rem;
+  }
+
+  .entry {
+    margin-top: 10px;
+    line-height: 1.6;
+    color: #d9e2ec;
+  }
+
+  .read-more {
+    display: inline-block;
+    margin-top: 15px;
+    color: pink;
+    font-weight: bold;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+  }
+
+  /* Sayfalama Butonları */
+  .pagination {
+    margin-top: 40px;
+    text-align: center;
+  }
+  
+  .btn {
+    background: pink;
+    color: #0f172a !important;
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 0 10px;
+  }
+</style>
+
+<div class="posts">
+  {% for post in paginator.posts %}
+    <article class="post">
+      <h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h1>
+      <div class="entry">
+        {{ post.excerpt }}
+      </div>
+      <a href="{{ site.baseurl }}{{ post.url }}" class="read-more">Devamını Oku →</a>
+    </article>
+  {% endfor %}
+</div>
+
+{% if paginator.total_pages > 1 %}
+<div class="pagination">
+  {% if paginator.previous_page %}
+    <a href="{{ paginator.previous_page_path }}" class="btn">« Geri</a>
+  {% endif %}
+  <span>Sayfa {{ paginator.page }} / {{ paginator.total_pages }}</span>
+  {% if paginator.next_page %}
+    <a href="{{ paginator.next_page_path }}" class="btn">İleri »</a>
+  {% endif %}
+</div>
+{% endif %}

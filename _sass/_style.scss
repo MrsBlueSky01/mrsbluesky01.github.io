@@ -1,0 +1,41 @@
+/* Ana Arkaplan */
+body {
+  background-color: $background-color;
+  color: pink;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Kart Tasarımı */
+.post, .entry {
+    background: rgba(255, 201, 253, 0.575) !important; /* Çok hafif beyaz/şeffaf */
+    backdrop-filter: blur(10px); /* Buzlu cam efekti */
+    border: 1px solid rgba(255, 20, 145, 0.748); /* İnce pembe kenarlık */
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+/* Kartın üzerine gelince parlama efekti */
+.post:hover {
+  transform: translateY(-8px);
+  border-color: pink;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+}
+
+/* Başlık Linkleri */
+.post h1 a {
+  color: pink;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+/* "Devamını Oku" Butonu */
+.read-more {
+  display: inline-block;
+  margin-top: 15px;
+  color: pink;
+  font-weight: bold;
+  font-size: 0.9em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}

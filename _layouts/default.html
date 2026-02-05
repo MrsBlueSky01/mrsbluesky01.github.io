@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{% if page.title %}{{ page.title }} – {% endif %}{{ site.name }} – {{ site.description }}</title>
+    {% include meta.html %}
+    <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
+    
+   <style>
+  body { background-color: #000 !important; margin: 0; font-family: 'Inter', sans-serif; }
+
+  /* 1. ARKA PLAN KATMANI (SABİTLENDİ) */
+  .hero-section {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #000;
+      position: fixed; 
+      top: 0;
+      left: 0;
+      z-index: -1;
+  }
+
+ #bg-terminal {
+    color: rgba(255, 20, 147, 1);
+    font-family: 'Courier New', monospace;
+    font-size: clamp(18px, 3.5vw, 32px); 
+    width: 90%;
+    max-width: 1200px;
+    line-height: 1.2;
+    text-align: left;
+    white-space: pre-wrap;
+    text-shadow: 0 0 3px #f8a5e3, 0 0 10px #940c94, 0 0 20px #fd7dc1, 0 0 40px #d540ad;
+    filter: brightness(1.75) contrast(1.2); 
+    animation: flicker 7s infinite;
+}
+
+@keyframes flicker {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 1; }
+    20%, 24%, 55% { opacity: 0.8; }
+}
+
+  /* 2. HEADER - WRAPPER */
+  .wrapper-masthead {
+      margin-top: 80vh; 
+      position: relative;
+      z-index: 10;
+      background: rgba(0, 0, 0, 0.9) !important;
+      backdrop-filter: blur(15px);
+      border-top: 1px solid rgba(253, 125, 193, 0.3);
+      padding: 1.5rem 0;
+  }
+
+  .masthead {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+  }
+
+  /* Sol taraf: Avatar ve Bilgi */
+  .site-avatar {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      text-decoration: none;
+  }
+
+  .site-avatar img {
+      width: 65px;
+      height: 65px;
+      border-radius: 50%;
+      border: 2px solid #fd7dc1;
+      transition: transform 0.3s ease;
+  }
+
+/* Header Bilgileri ve Hizalama */
+.site-info {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important; /* Blog sayfasındaki ortalamayı ezer */
+    text-align: left !important;
+    float: none !important;
+}
+
+/* İsim (Title) Ayarı - Pembe kalması için */
+.site-name {
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: 1.8rem !important;
+}
+
+.site-name a {
+    color: #fd7dc1 !important; /* Senin neon pemben */
+    text-decoration: none !important;
+    text-shadow: 0 0 10px rgba(253, 125, 193, 0.4) !important;
+}
+
+/* Açıklama (Description) Ayarı */
+.site-description {
+    margin: 5px 0 0 0 !important;
+    color: #fff !important;
+    font-size: 0.9rem !important;
+    opacity: 0.9 !important;
+    display: block !important; /* Görünmeme sorununu çözer */
+    text-align: left !important;
+}
+
+/* Blog sayfasındaki olası float/center çakışmalarını engellemek için */
+.site-header-left {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+}
+  /* Sağ taraf: Navigasyon */
+  nav {
+      display: flex;
+      gap: 20px;
+  }
+
+  nav a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+      position: relative;
+  }
+
+  nav a:hover { color: #fd7dc1; }
+
+  nav a::after {
+      content: '';
+      position: absolute;
+      width: 0; height: 2px; bottom: -5px; left: 0;
+      background-color: #fd7dc1;
+      transition: width 0.3s ease;
+  }
+
+  nav a:hover::after { width: 100%; }
+
+  #main {
+      position: relative; 
+      z-index: 5;
+      background: rgba(10, 10, 10, 0.8); 
+      padding: 40px 20px;
+      border-radius: 20px 20px 0 0;
+      max-width: 900px;
+      margin: 0 auto;
+      min-height: 100vh;
+  }
+
+  @media screen and (max-width: 768px) {
+      .masthead { flex-direction: column; gap: 20px; text-align: center; }
+      .site-avatar { flex-direction: column; }
+      .wrapper-masthead { margin-top: 60vh; }
+  }
+</style>
+  </head>
+  
+  <body>
+    <section class="hero-section">
+        <div id="bg-terminal"></div>
+    </section>
+
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead">
+          <div class="site-header-left">
+            <a href="{{ site.baseurl }}/" class="site-avatar">
+              <img src="{{ site.avatar }}" alt="{{ site.name }}" />
+              <div class="site-info">
+                <h1 class="site-name">{{ site.name }}</h1>
+                <p class="site-description">{{ site.description }}</p>
+              </div>
+            </a>
+          </div>
+          <nav>
+            <a href="{{ site.baseurl }}/">Blog</a>
+            <a href="{{ site.baseurl }}/about">About</a>
+            <a href="{{ site.baseurl }}/portfolio">Portfolio</a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div id="main" role="main" class="container">
+      {{ content }}
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          {% include svg-icons.html %}
+        </footer>
+      </div>
+    </div>
+
+    <script>
+        const bgTerminal = document.getElementById('bg-terminal');
+        const codeText = `using Godot;
+using System;
+
+// Game Dev Journey: Day 365
+public partial class Player : CharacterBody2D
+{
+    public override void _PhysicsProcess(double delta)
+    {
+        if (IsJobSearching) {
+            LearnNewSkills();
+            KeepCoding();
+            StayFabulous();
+        }
+    }
+}`;
+
+        let index = 0;
+        let isDeleting = false;
+
+        function type() {
+            const currentText = codeText.substring(0, index);
+            bgTerminal.innerText = currentText;
+
+            if (!isDeleting && index < codeText.length) {
+                index++;
+                setTimeout(type, 50);
+            } else if (isDeleting && index > 0) {
+                index--;
+                setTimeout(type, 20);
+            } else if (!isDeleting && index === codeText.length) {
+                isDeleting = true;
+                setTimeout(type, 3000); 
+            } else if (isDeleting && index === 0) {
+                isDeleting = false;
+                setTimeout(type, 500);
+            }
+        }
+        type();
+    </script>
+    {% include analytics.html %}
+  </body>
+</html>
