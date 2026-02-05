@@ -6,9 +6,15 @@
     <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
     
    <style>
-  body { background-color: #000 !important; margin: 0; font-family: 'Inter', sans-serif; }
+  /* GENEL AYARLAR */
+  body { 
+      background-color: #000 !important; 
+      margin: 0; 
+      font-family: 'Inter', sans-serif; 
+      color: #fff;
+  }
 
-  /* 1. ARKA PLAN KATMANI (SABİTLENDİ) */
+  /* 1. ARKA PLAN KATMANI (SABİT) */
   .hero-section {
       width: 100%;
       height: 100vh;
@@ -19,33 +25,33 @@
       position: fixed; 
       top: 0;
       left: 0;
-      z-index: -1;
+      z-index: 1; /* Arka planda kalmalı ama çok dipte değil */
   }
 
- #bg-terminal {
-    color: rgba(255, 20, 147, 1);
-    font-family: 'Courier New', monospace;
-    font-size: clamp(18px, 3.5vw, 32px); 
-    width: 90%;
-    max-width: 1200px;
-    line-height: 1.2;
-    text-align: left;
-    white-space: pre-wrap;
-    text-shadow: 0 0 3px #f8a5e3, 0 0 10px #940c94, 0 0 20px #fd7dc1, 0 0 40px #d540ad;
-    filter: brightness(1.75) contrast(1.2); 
-    animation: flicker 7s infinite;
-}
+  #bg-terminal {
+      color: rgba(255, 20, 147, 1);
+      font-family: 'Courier New', monospace;
+      font-size: clamp(18px, 3.5vw, 32px); 
+      width: 90%;
+      max-width: 1200px;
+      line-height: 1.2;
+      text-align: left;
+      white-space: pre-wrap;
+      text-shadow: 0 0 3px #f8a5e3, 0 0 10px #940c94, 0 0 20px #fd7dc1, 0 0 40px #d540ad;
+      filter: brightness(1.75) contrast(1.2); 
+      animation: flicker 7s infinite;
+  }
 
-@keyframes flicker {
-    0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 1; }
-    20%, 24%, 55% { opacity: 0.8; }
-}
+  @keyframes flicker {
+      0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 1; }
+      20%, 24%, 55% { opacity: 0.8; }
+  }
 
-  /* 2. HEADER - WRAPPER */
+  /* 2. HEADER (MASTHEAD) */
   .wrapper-masthead {
-      margin-top: 80vh; 
+      margin-top: 70vh; /* Terminal yazısının biraz altında başlasın */
       position: relative;
-      z-index: 10;
+      z-index: 20; /* Her şeyin üstünde olmalı */
       background: rgba(0, 0, 0, 0.9) !important;
       backdrop-filter: blur(15px);
       border-top: 1px solid rgba(253, 125, 193, 0.3);
@@ -61,108 +67,40 @@
       padding: 0 20px;
   }
 
-  /* Sol taraf: Avatar ve Bilgi */
-  .site-avatar {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      text-decoration: none;
-  }
+  .site-avatar { display: flex; align-items: center; gap: 15px; text-decoration: none; }
+  .site-avatar img { width: 65px; height: 65px; border-radius: 50%; border: 2px solid #fd7dc1; }
 
-  .site-avatar img {
-      width: 65px;
-      height: 65px;
-      border-radius: 50%;
-      border: 2px solid #fd7dc1;
-      transition: transform 0.3s ease;
-  }
+  .site-info { display: flex !important; flex-direction: column !important; align-items: flex-start !important; }
+  .site-name { margin: 0 !important; font-size: 1.8rem !important; }
+  .site-name a { color: #fd7dc1 !important; text-decoration: none !important; }
+  .site-description { margin: 5px 0 0 0 !important; color: #fff !important; font-size: 0.9rem !important; opacity: 0.8; }
 
-/* Header Bilgileri ve Hizalama */
-.site-info {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: flex-start !important; /* Blog sayfasındaki ortalamayı ezer */
-    text-align: left !important;
-    float: none !important;
-}
-
-/* İsim (Title) Ayarı - Pembe kalması için */
-.site-name {
-    margin: 0 !important;
-    padding: 0 !important;
-    font-size: 1.8rem !important;
-}
-
-.site-name a {
-    color: #fd7dc1 !important; /* Senin neon pemben */
-    text-decoration: none !important;
-    text-shadow: 0 0 10px rgba(253, 125, 193, 0.4) !important;
-}
-
-/* Açıklama (Description) Ayarı */
-.site-description {
-    margin: 5px 0 0 0 !important;
-    color: #fff !important;
-    font-size: 0.9rem !important;
-    opacity: 0.9 !important;
-    display: block !important; /* Görünmeme sorununu çözer */
-    text-align: left !important;
-}
-
-/* Blog sayfasındaki olası float/center çakışmalarını engellemek için */
-.site-header-left {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: flex-start !important;
-}
-  /* Sağ taraf: Navigasyon */
-  nav {
-      display: flex;
-      gap: 20px;
-  }
-
-  nav a {
-      color: #fff;
-      text-decoration: none;
-      font-size: 1rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      transition: all 0.3s ease;
-      position: relative;
-  }
-
+  nav { display: flex; gap: 20px; }
+  nav a { color: #fff; text-decoration: none; font-weight: 500; text-transform: uppercase; transition: 0.3s; }
   nav a:hover { color: #fd7dc1; }
 
-  nav a::after {
-      content: '';
-      position: absolute;
-      width: 0; height: 2px; bottom: -5px; left: 0;
-      background-color: #fd7dc1;
-      transition: width 0.3s ease;
-  }
-
-  nav a:hover::after { width: 100%; }
-
+  /* 3. ANA İÇERİK ALANI (BLOG POSTLARI BURADA) */
   #main {
       position: relative; 
-      z-index: 5;
-      background: rgba(10, 10, 10, 0.8); 
-      padding: 40px 20px;
-      border-radius: 20px 20px 0 0;
+      z-index: 15; /* Terminalin üstünde, masthead'in altında/hizasında */
+      background: #0a0a0a; /* Şeffaf değil, yazılar okunmalı */
+      padding: 60px 20px;
       max-width: 900px;
       margin: 0 auto;
       min-height: 100vh;
+      box-shadow: 0 -20px 50px rgba(0,0,0,0.5); /* Geçişi yumuşatır */
   }
 
+  /* Mobilde bozulmaması için */
   @media screen and (max-width: 768px) {
-      .masthead { flex-direction: column; gap: 20px; text-align: center; }
-      .site-avatar { flex-direction: column; }
-      .wrapper-masthead { margin-top: 60vh; }
+      .masthead { flex-direction: column; text-align: center; }
+      .site-info { align-items: center !important; }
+      .wrapper-masthead { margin-top: 50vh; }
   }
 </style>
-  </head>
+</head>
   
-  <body>
+<body>
     <section class="hero-section">
         <div id="bg-terminal"></div>
     </section>
@@ -174,7 +112,7 @@
             <a href="{{ site.baseurl }}/" class="site-avatar">
               <img src="{{ site.avatar }}" alt="{{ site.name }}" />
               <div class="site-info">
-                <h1 class="site-name">{{ site.name }}</h1>
+                <h1 class="site-name"><a href="{{ site.baseurl }}/">{{ site.name }}</a></h1>
                 <p class="site-description">{{ site.description }}</p>
               </div>
             </a>
@@ -241,6 +179,5 @@ public partial class Player : CharacterBody2D
         }
         type();
     </script>
-    {% include analytics.html %}
-  </body>
+</body>
 </html>
